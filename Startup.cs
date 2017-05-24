@@ -47,7 +47,7 @@ namespace IdSvr4POC
             options.UseSqlServer(Configuration.GetConnectionString("IdentityServer4DB")));
 
             services.AddIdentity<ApplicationUser,ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext,long>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();

@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace IdSvr4POC.Models
 {
-    public class ApplicationRole: IdentityRole
+    public class ApplicationRole: IdentityRole<long>
     {
-        [MaxLength(256)]
         public string RoleDescription { get; set;}
     }
 }

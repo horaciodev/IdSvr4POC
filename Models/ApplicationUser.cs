@@ -8,11 +8,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace IdSvr4POC.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<long>
     {
-        [MaxLength(256)]
         public string FirstName { get; set; }
-        [MaxLength(256)]
         public string LastName { get; set; }
     }
 }
