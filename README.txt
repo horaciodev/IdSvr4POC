@@ -1,5 +1,7 @@
 Identity Server 4 Hosted on a .NetCore MVC App with AspNet Identity user base.
-Configured Clients: a4App, type: Javascript
+Configured Clients: 
+                    -a4App, type: Javascript
+                    -CoreMvcApp: AspNet MVC Core - Implicit Flow
 
 1. Clone Repo
 2. run >dotnet restore

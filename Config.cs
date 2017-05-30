@@ -35,6 +35,25 @@ namespace IdSvr4POC{
                         IdentityServerConstants.StandardScopes.Profile, 
                         "sampleAPI" 
                         }
+                },
+                new Client
+                {
+                    ClientId = "CoreMvcApp",
+                    ClientName = "NetCore MVC Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+
+                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+
+                    PostLogoutRedirectUris = { "http://localhost:5002/Home/Index" },
+
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "role",
+                         "sampleAPI"
+                    }
                 }
             };
         }
@@ -44,7 +63,8 @@ namespace IdSvr4POC{
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Email()
             };
         }
     }
