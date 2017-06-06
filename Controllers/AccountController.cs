@@ -17,6 +17,7 @@ using IdSvr4POC.Models.AccountViewModels;
 using IdSvr4POC.Services;
 
 using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Events;
 using IdentityServer4.Services;
 using IdentityServer4.Extensions;
@@ -209,8 +210,7 @@ namespace IdSvr4POC.Controllers
             }
 
             // delete local authentication cookie
-            await HttpContext.Authentication.SignOutAsync("Cookies");
-            await HttpContext.Authentication.SignOutAsync("oidc");
+            await HttpContext.Authentication.SignOutAsync();
 
             var user = await HttpContext.GetIdentityServerUserAsync();
             if (user != null)

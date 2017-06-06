@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.4.337" />
     <PackageReference Include="IdentityServer4" Version="1.5.1" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />

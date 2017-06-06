@@ -25,7 +25,7 @@ namespace IdSvr4POC{
 
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris = { "http://localhost:5003/callback.html" },
+                    RedirectUris = { "http://localhost:5003/auth.html" },
                     PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
                     AllowedCorsOrigins = { "http://localhost:5003" },
                    
