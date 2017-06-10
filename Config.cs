@@ -28,6 +28,7 @@ namespace IdSvr4POC{
                     RedirectUris = { "http://localhost:5003/auth.html" },
                     PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
                     AllowedCorsOrigins = { "http://localhost:5003" },
+                    RequireConsent = false,
                    
                     //scopes the client has access to
                     AllowedScopes = {
