@@ -25,10 +25,15 @@ namespace IdSvr4POC{
 
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris = { "http://localhost:5003/auth.html" },
+                    RedirectUris = { "http://localhost:5003/auth.html", "http://localhost:5003/silent-renew.html" },
                     PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
                     AllowedCorsOrigins = { "http://localhost:5003" },
                     RequireConsent = false,
+                    /**
+                    Enable for testing
+                    AccessTokenLifetime = 120,
+                    IdentityTokenLifetime = 120,
+                    * */
                    
                     //scopes the client has access to
                     AllowedScopes = {
