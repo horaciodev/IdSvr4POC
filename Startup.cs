@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+//using Microsoft.IdentityModel.Tokens;
 
 using IdSvr4POC.Data;
 using IdSvr4POC.Models;
@@ -58,7 +60,7 @@ namespace IdSvr4POC
 
             //add Identity Server4
             services.AddIdentityServer()
-                .AddTemporarySigningCredential()
+                .AddSigningCredential(LoadCertFromStore())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())
@@ -93,6 +95,50 @@ namespace IdSvr4POC
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private X509Certificate2 LoadCertFromStore()
+        {
+            X509Certificate2 x509Cert = null;
+            X509Store certStore = null; 
+
+            try
+            {
+                certStore = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+
+                var idSvr4ConfigSettings = Configuration.GetSection("IdSrv4Settings");
+                var certThumbPrint = idSvr4ConfigSettings.GetValue<string>("TokenSigningCertificateThumbPrint");
+
+                certStore.Open(OpenFlags.ReadOnly);
+
+                var certCollection = certStore.Certificates.Find(X509FindType.FindByThumbprint, certThumbPrint, false);
+
+
+
+                if (0 == certCollection.Count)
+                {
+                    throw new Exception("No certificate was found containing specified thumbprint");
+                }
+                string certPwd = idSvr4ConfigSettings.GetValue<string>("signing-certificate.password");
+
+                byte[] certBytes = certCollection[0].Export(X509ContentType.Pkcs12, certPwd);
+
+                x509Cert = new X509Certificate2(certBytes, certPwd
+                                                , X509KeyStorageFlags.MachineKeySet);
+
+                
+            }
+            //catch
+            //{
+            //    Log.Information("Failed to load certificate from store");
+            //}
+            finally
+            {
+                
+                certStore.Dispose();
+            }
+
+            return x509Cert;
         }
     }
 }
