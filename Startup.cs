@@ -16,10 +16,13 @@ using Microsoft.Extensions.Logging;
 using IdSvr4POC.Data;
 using IdSvr4POC.Models;
 using IdSvr4POC.Services;
+using IdSvr4POC.Infrastructure;
 
 using IdentityServer4;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
+using IdentityServer4.Services;
+
 
 namespace IdSvr4POC
 {
@@ -59,6 +62,7 @@ namespace IdSvr4POC
             services.AddMvc();
 
             //add application services
+            services.AddTransient<IProfileService, IdentityClaimsProfileService>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 

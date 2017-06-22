@@ -11,6 +11,9 @@ namespace IdSvr4POC{
             return new List<ApiResource>
             {
                 new ApiResource("sampleAPI","My API")
+                {
+                    UserClaims = {"role"}
+                }
             };
         }
 
